@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
-import { Image, FlatList, TouchableOpacity, Text } from 'react-native';
+import { Image, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import logoImg from '../../assets/image-9.svg';
-// import { translate } from "../../locales";
-import { GameCard, GameCardProps } from "../../components/GameCard";
+
+import { MatchCard, MatchCardProps } from "../../components/MatchCard";
 import { Background } from "../../components/Background";
 import { Heading } from "../../components/Heading";
 
 import { styles } from './styles';
 
-export function Home() {
-  const [games, setGames] = useState<GameCardProps[]>([])
+export function Matches() {
+  const [games, setGames] = useState<MatchCardProps[]>([])
 
   const navigation = useNavigation();
 
-  function handleOpenGaming({ id, title, bannerUrl }: GameCardProps) {
-    navigation.navigate('game', { id, title, bannerUrl });
+  function handleOpenNews({ id, timeA, timeB, placarTimeA, placarTimeB, imgTimeA, imgTimeB }: MatchCardProps) {
+    navigation.navigate("news", { id, timeA, timeB, placarTimeA, placarTimeB, imgTimeA, imgTimeB });
   }
 
   useEffect(() => {
-    fetch('http://localhost:3030/games')
+    fetch('http://localhost:3030/matches')
       .then(response => response.json())
       .then(data => setGames(data))
   }, []);
@@ -34,17 +34,17 @@ export function Home() {
         />
 
         <Heading
-          title="Encontre seu duo!"
-          subtitle="Selecione o game que deseja jogar..."
+          title="Útlimas partidas do BR6"
+          subtitle="Veja os resultados e notícias!"
         />
-        {/* <Text>{translate('hello')}</Text> */}
+
         <FlatList
           data={games}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <GameCard
+            <MatchCard
               data={item}
-              onPress={() => handleOpenGaming(item)}
+              onPress={() => handleOpenNews(item)}
             />
           )}
           showsHorizontalScrollIndicator={false}

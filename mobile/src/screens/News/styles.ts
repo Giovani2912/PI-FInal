@@ -22,11 +22,24 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20
   },
+  wrapperImages: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
   cover: {
-    width: 311,
-    height: 160,
+    width: 60,
+    height: 60,
     borderRadius: 8,
     marginTop: 32,
+    marginHorizontal: 10
+  },
+  x: {
+    color: THEME.COLORS.TEXT,
+    fontSize: THEME.FONT_SIZE.LG,
+    fontFamily: THEME.FONT_FAMILY.BOLD,
+    paddingTop: 30
   },
   containerList: {
     width: '100%',
@@ -45,18 +58,5 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  partidaContainer: {
-    alignItems: "center",
-    backgroundColor: THEME.COLORS.PRIMARY,
-    padding: 10,
-    width: 214,
-    borderRadius: 7,
-    marginTop: 10
-
-  },
-  partidaTexto: {
-    color: THEME.COLORS.TEXT,
-    fontFamily: THEME.FONT_FAMILY.REGULAR,
-  },
+  }
 })

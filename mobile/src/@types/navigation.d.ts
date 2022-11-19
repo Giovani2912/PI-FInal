@@ -4,6 +4,16 @@ export interface GameParams {
   bannerUrl: string;
 }
 
+export interface MatchParams {
+  id: string;
+  timeA: string;
+  timeB: string;
+  placarTimeA: string;
+  placarTimeB: string;
+  imgTimeA: string;
+  imgTimeB: string;
+}
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {

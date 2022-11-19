@@ -4,7 +4,7 @@ import { Image, TouchableOpacity, Text, TextInput } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 
-import logoImg from '../../assets/logo-nlw-esports.png';
+import logoImg from '../../assets/image-9.svg'
 
 import { GameCard, GameCardProps } from "../../components/GameCard";
 import { Background } from "../../components/Background";
@@ -18,7 +18,11 @@ export function RegisterUser() {
   const [discordId, onChangeDiscordId] = React.useState("Discord Id");
   const [password, onChangePassword] = React.useState("Password");
 
+  const navigation = useNavigation();
 
+  function chancheRegister() {
+    navigation.navigate('loginuser');
+  }
   const onPress = () => ({});
 
   return (
@@ -37,34 +41,36 @@ export function RegisterUser() {
         <TextInput
           style={styles.input}
           onChangeText={onChangeUsername}
-          value={username}
+          placeholder="Nome de usuário"
         />
 
         <TextInput
           style={styles.input}
           onChangeText={onChangeEmail}
-          value={email}
+          placeholder="Email"
         />
 
         <TextInput
           style={styles.input}
           onChangeText={onChangeDiscordId}
-          value={discordId}
+          placeholder="Nome no Discord"
         />
 
         
         <TextInput
           style={styles.input}
           onChangeText={onChangePassword}
-          value={password}
+          placeholder="Senha"
+          secureTextEntry={true}
+
         />
         
 
         <TouchableOpacity
           style={styles.button}
-          onPress={onPress}
+          onPress={chancheRegister}
         >
-          <Text style={styles.text}>Register</Text>
+          <Text style={styles.text}>Cadastrar</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </Background>

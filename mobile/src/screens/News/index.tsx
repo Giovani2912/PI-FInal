@@ -6,45 +6,35 @@ import { Entypo } from '@expo/vector-icons';
 
 import logoImg from '../../assets/image-9.svg';
 
-
 import { THEME } from "../../theme";
 import { styles } from './styles';
 
-import { GameParams } from "../../@types/navigation";
+import { MatchParams } from "../../@types/navigation";
 
 import { Heading } from "../../components/Heading";
 import { Background } from "../../components/Background";
 import { DuoMatch } from "../../components/DuoMatch";
 import { DuoCard, DuoCardProps } from "../../components/DuoCard";
+import {NewsCard} from "../../components/NewsCard"
 
-export function Game() {
+export function News() {
   const [duos, setDuos] = useState<DuoCardProps[]>([])
   const [discordDuoSelected, setDiscordDuoSelected] = useState('');
 
   const navigation = useNavigation();
   const router = useRoute();
-  const game = router.params as GameParams;
+  const match = router.params as MatchParams;
 
   function handleGoBack() {
     navigation.goBack();
   }
 
-  async function getDiscordUser(adsId: string) {
-    fetch(`http://localhost:3030/ads/${adsId}/discord`)
-      .then(response => response.json())
-      .then(data => setDiscordDuoSelected(data.discord))
-  }
 
   useEffect(() => {
-    fetch(`http://localhost:3030/games/${game.id}/ads`)
+    fetch(`http://localhost:3030/matches/${match.id}/news`)
       .then(response => response.json())
       .then(data => setDuos(data))
   }, []);
-
-
-  function handleOpenMatches() {
-    navigation.navigate('matche');
-  }
 
   return (
     <Background>
@@ -66,33 +56,42 @@ export function Game() {
           <View style={styles.right} />
         </View>
 
-        <Image
-          source={{ uri: game.bannerUrl }}
-          style={styles.cover}
-          resizeMode="cover"
-        />
-
+        <View style={styles.wrapperImages}>
+          <Image
+            source={{ uri: match.imgTimeA }}
+            style={styles.cover}
+            resizeMode="cover"
+          />
+          <Text style={styles.x}>
+              X
+            </Text>
+          <Image
+            source={{ uri: match.imgTimeB }}
+            style={styles.cover}
+            resizeMode="cover"
+          />
+        </View>
         <Heading
-          title={game.title}
-          subtitle="Conecte-se e comece a jogar!"
+          title="Fique por dentro"
+          subtitle="Veja as notícias sobre essa partida!"
         />
 
         <FlatList
           data={duos}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <DuoCard
+            <NewsCard 
               data={item}
-              onConnect={() => getDiscordUser(item.id)}
+            
             />
           )}
-          horizontal
+          
           style={styles.containerList}
           contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent ]}
           showsHorizontalScrollIndicator
           ListEmptyComponent={
             <Text style={styles.emptyListText}>
-              Não há anúncios publicados ainda.
+              Não há notícias publicadas ainda.
             </Text>
           }
         />
@@ -103,9 +102,6 @@ export function Game() {
           onClose={() => setDiscordDuoSelected('')}
         />
       </SafeAreaView>
-      <TouchableOpacity onPress={handleOpenMatches} style={styles.partidaContainer}>
-            <Text style={styles.partidaTexto}>Ver os últimos jogos</Text>
-          </TouchableOpacity>
     </Background>
   );
 }

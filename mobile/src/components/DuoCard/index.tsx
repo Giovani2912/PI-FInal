@@ -14,6 +14,8 @@ export interface DuoCardProps {
   useVoiceChannel: boolean;
   weekDays: string[];
   yearsPlaying: number;
+  titulo: string;
+  descricao: string
 }
 
 interface Props {

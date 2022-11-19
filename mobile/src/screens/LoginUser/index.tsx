@@ -3,8 +3,8 @@ import React from 'react'
 import { Image, TouchableOpacity, Text, TextInput } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import logoImg from '../../assets/image-9.svg';
 
-import logoImg from '../../assets/logo-nlw-esports.png';
 
 import { GameCard, GameCardProps } from "../../components/GameCard";
 import { Background } from "../../components/Background";
@@ -15,9 +15,15 @@ import { styles } from './styles';
 export function LoginUser() {
   const [email, onChangeEmail] = React.useState("Email");
   const [password, onChangePassword] = React.useState("Password");
+  const navigation = useNavigation();
 
+  function chancjeLogin() {
+    navigation.navigate('home');
+  }
 
-  const onPress = () => ({});
+  function chancheRegister() {
+    navigation.navigate('registeruser');
+  }
 
   return (
     <Background>
@@ -35,21 +41,30 @@ export function LoginUser() {
         <TextInput
           style={styles.input}
           onChangeText={onChangeEmail}
-          value={email}
+          placeholder="Email"
         />
         
         <TextInput
           style={styles.input}
           onChangeText={onChangePassword}
-          value={password}
+          placeholder="Senha"
+          secureTextEntry={true}
+
         />
         
 
         <TouchableOpacity
           style={styles.button}
-          onPress={onPress}
+          onPress={chancjeLogin}
         >
-          <Text style={styles.text}>Sign In</Text>
+          <Text style={styles.text}>Entrar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttonLink}
+          onPress={chancheRegister}
+        >
+          <Text style={styles.textLink}>Não tenho conta</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </Background>

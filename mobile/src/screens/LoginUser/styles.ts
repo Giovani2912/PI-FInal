@@ -35,8 +35,22 @@ export const styles = StyleSheet.create({
     marginTop: 10
 
   },
+  buttonLink: {
+    alignItems: "center",
+    padding: 10,
+    width: 214,
+    borderRadius: 7,
+    marginTop: 10,
+    borderBottomColor: 'white'
+
+  },
   text: {
     color: THEME.COLORS.TEXT,
     fontFamily: THEME.FONT_FAMILY.REGULAR,
+  },
+  textLink: {
+    color: THEME.COLORS.PRIMARY,
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+    textDecorationLine: 'underline'
   }
 });
